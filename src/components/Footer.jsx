@@ -152,6 +152,11 @@ const Footer = () => {
               <a className="group relative hover:text-white transition-colors duration-300">
                 <span className="relative z-10">Cookie Policy</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-purple-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -inset-2"></div>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 bg-gray-900 border border-gray-700 rounded-xl p-4 text-left text-gray-300 text-xs leading-relaxed shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none">
+                  <p className="font-semibold text-white mb-2">Cookie Policy</p>
+                  <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Essential cookies are required for the site to function. You can manage your cookie preferences at any time through your browser settings.</p>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-700"></div>
+                </div>
               </a>
               <Link
                 to="/contact"
