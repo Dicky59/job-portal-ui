@@ -13,6 +13,92 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 React 19 SPA using Vite 7, Tailwind CSS 4, and React Router 7. No TypeScript — plain JSX throughout.
 
+## Repository Structure
+
+```
+job-portal-ui/
+├── public/               # Static assets (favicons, company logos)
+├── src/
+│   ├── components/       # Reusable UI components (Navbar, Footer, Layout, ProtectedRoute, etc.)
+│   ├── context/          # Core React contexts: AuthContext, JobContext, ThemeContext
+│   ├── contexts/         # Data-fetching contexts: JobsDataContext, CompaniesContext
+│   ├── data/             # mockData.js — all seed data (jobs, companies, users)
+│   ├── pages/            # Route-level page components
+│   │   └── admin/        # Admin-only pages (Dashboard, CompanyManagement, etc.)
+│   ├── services/         # Simulated async API service functions
+│   ├── utils/            # Shared utilities (delay.js)
+│   ├── App.jsx           # Root component — router + provider tree
+│   ├── main.jsx          # Entry point
+│   └── index.css         # Global styles (Tailwind imports)
+├── eslint.config.js      # ESLint flat config
+├── vite.config.js        # Vite configuration
+└── index.html            # HTML entry point
+```
+
+**Where to look:**
+
+- Adding a new page → `src/pages/` + register route in `App.jsx`
+- Shared UI → `src/components/`
+- Auth logic → `src/context/AuthContext.jsx`
+- Job/application logic → `src/context/JobContext.jsx`
+- Mock data changes → `src/data/mockData.js`
+- API simulation → `src/services/`
+
+## Git Conventions
+
+### Branching
+
+```
+feature/add-job-filter-sidebar         # New features
+fix/employer-route-redirect-loop       # Bug fixes
+docs/update-readme                     # Documentation only
+chore/upgrade-dependencies             # Maintenance, tooling
+refactor/simplify-auth-context         # Code refactoring
+style/mobile-job-card-spacing          # Visual/style changes
+```
+
+- Branch off `main` for all new work
+- Keep branches short-lived; open a PR when ready
+- Delete branches after merging
+
+### Commit Messages
+
+Follow **Conventional Commits**:
+
+```
+feat: add saved jobs count to navbar
+fix: correct role guard on employer routes
+docs: update README with localStorage keys
+chore: upgrade react-router to v7.8
+refactor: extract job card into reusable component
+style: fix spacing on mobile job list
+```
+
+- Use present tense, lowercase, no period at the end
+- Keep the subject line under 72 characters
+- Add a body for non-obvious changes
+
+### Pull Requests
+
+- PR title should match the commit message format
+- Include a summary and test plan in the PR description
+- Target `main` as the base branch
+
+## Coding Standards
+
+### General
+
+- **No TypeScript** — plain JSX throughout; do not add `.ts`/`.tsx` files
+- **Functional components only** — no class components
+- **Named exports** preferred over default exports for components
+- Keep components focused — extract reusable pieces into `src/components/`
+
+### Styling
+
+- Use **Tailwind CSS utility classes** exclusively — no inline styles, no CSS modules
+- Follow mobile-first responsive design (`sm:`, `md:`, `lg:` breakpoints)
+- Dark mode via `ThemeContext` — use conditional class toggling, not `dark:` variants
+
 ### State Management
 
 Two layers of React Context:
@@ -31,9 +117,10 @@ Key localStorage keys: `jobPortalUser`, `authToken`, `registeredUsers`, `globalP
 ### Routing & Roles
 
 Three roles with route protection via `ProtectedRoute` component:
+
 - **ROLE_JOB_SEEKER** — profile, applied-jobs, saved-jobs
 - **ROLE_EMPLOYER** — post-job, employer/jobs, job-applicants/:jobId
-- **ROLE_ADMIN** — admin/*, admin pages in `src/pages/admin/`
+- **ROLE_ADMIN** — admin/\*, admin pages in `src/pages/admin/`
 
 ### Key Libraries
 
